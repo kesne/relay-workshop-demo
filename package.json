@@ -6,17 +6,45 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "relay": "relay-compiler",
+    "generate-schema": "ts-node src/pages/api/graphql.ts",
+    "postinstall": "prisma generate",
+    "setup": "prisma db push && prisma db seed && yarn run generate-schema && yarn run relay"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
+    "@giraphql/core": "^2.16.0",
+    "@giraphql/plugin-prisma": "^0.10.0",
+    "@giraphql/plugin-relay": "^2.16.0",
+    "@giraphql/plugin-simple-objects": "^2.9.0",
+    "@mantine/core": "^3.0.5",
+    "@mantine/hooks": "^3.0.5",
+    "@mantine/next": "^3.0.5",
+    "@prisma/client": "^3.3.0",
+    "@radix-ui/react-icons": "^1.0.3",
+    "@types/relay-runtime": "^12.0.0",
+    "babel-plugin-relay": "^12.0.0",
+    "graphql": "^15.6.1",
+    "graphql-helix": "^1.8.3",
     "next": "11.1.2",
+    "prisma": "^3.3.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-relay": "^12.0.0",
+    "relay-compiler": "^12.0.0",
+    "relay-compiler-language-typescript": "^14.2.1",
+    "relay-config": "^12.0.0",
+    "relay-hooks": "^5.0.1",
+    "relay-runtime": "^12.0.0"
   },
   "devDependencies": {
     "@types/react": "17.0.30",
     "eslint": "8.0.1",
     "eslint-config-next": "11.1.2",
+    "ts-node": "^10.3.0",
     "typescript": "4.4.4"
   }
 }

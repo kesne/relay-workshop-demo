@@ -1,34 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Relay Workshop Demo
+
+This is intended to demonstrate:
+
+- How Relay is setup in projects
+- How to setup and use the Relay Compiler
+- What Fragments are, and how components can use them to define their data dependencies
+- How to make fully re-usable components, leveraging fragments.
+- Basic implementations of pagination (infinite loading)
+- The basics of queries
+- The basics of mutations
+- Automatic cache updates through mutations
+- Basic project architecture
+
+This project is explicitly **not designed** to demonstrate the following:
+
+- **Preloading**: Preloading is incredibly important, and actaully how Relay wants you load data themselves! However, it is incredibly tied to your specific router and application patterns. It'd be possible to outline it here, but the resulting code wouldn't actually be particularly useful. The [Relay website has documentation](https://relay.dev/docs/guided-tour/rendering/queries/#rendering-queries) that can help you understand how it works conceptually.
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
 
 ```bash
-npm run dev
-# or
+yarn
+```
+
+Then run the setup script, which will setup and seed the database, and ensure all generated artifacts are compiled:
+
+```bash
+yarn setup
+```
+
+Now you can start the application. This will run a server on http://localhost:3000/. Open it in your browser to see the demo application.
+
+```bash
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Development Workflow
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Feature development of Relay features is mostly the same as normal React feature development. When updating any queries/fragments/mutations within the `graphql` tagged templates, you will need to run `yarn relay` to trigger re-running the Relay Compiler. Alternatively, you can start the relay compiler in a separate tab in watch mode:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```bash
+yarn relay --watch
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Where to Start
 
-## Learn More
+With the exception of the `relay.config.js` file, all of the relevant code lives in the `src` directory. Every file is annotated, trying to explain. I generally recommend that you start at `src/pages/posts/index.tsx`, and follow the components you see to gain a full understanding of how everything comes together.
 
-To learn more about Next.js, take a look at the following resources:
+## Additional Resources
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- https://graphql.org/
+- https://relay.dev/docs/guided-tour/
+- https://relay.dev/docs/guides/graphql-server-specification/
+- https://relay.dev/docs/principles-and-architecture/thinking-in-relay/

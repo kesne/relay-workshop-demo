@@ -1,0 +1,63 @@
+type Comment {
+  createdAt: DateTime!
+  id: ID!
+  text: String!
+  user: User!
+}
+
+type CreateCommentResult {
+  comment: Comment!
+}
+
+scalar DateTime
+
+type Mutation {
+  createComment(postId: ID!, text: String!): CreateCommentResult!
+  starPost(postId: ID!): Post!
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+type Post implements Node {
+  body: String!
+  comments(after: String, before: String, first: Int, last: Int): PostCommentsConnection!
+  commentsCount: Int!
+  createdAt: DateTime!
+  hasStarred: Boolean!
+  id: ID!
+  starsCount: Int!
+  title: String!
+  user: User!
+}
+
+type PostCommentsConnection {
+  edges: [PostCommentsConnectionEdge]!
+  pageInfo: PageInfo!
+}
+
+type PostCommentsConnectionEdge {
+  cursor: String!
+  node: Comment!
+}
+
+type Query {
+  node(id: ID!): Node
+  nodes(ids: [ID!]!): [Node]!
+  post(id: ID!): Post!
+  posts: [Post!]!
+}
+
+type User {
+  id: ID!
+  name: String!
+  username: String!
+}
