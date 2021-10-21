@@ -25,8 +25,6 @@ const fetchRelay: FetchFunction = async (operation, variables) => {
 
   const json = await res.json();
 
-  console.log(json);
-
   return json;
 };
 

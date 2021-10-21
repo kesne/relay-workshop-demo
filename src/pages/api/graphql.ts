@@ -111,7 +111,6 @@ builder.queryType({
         id: t.arg.globalID({ required: true }),
       },
       resolve: (query, _parent, { id }) => {
-        console.log(id);
         return db.post.findFirst({
           ...query,
           where: {
